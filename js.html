@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Siswa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a more elegant look */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-400 to-purple-500 text-gray-800">
+    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <form id="formstudent" class="w-full max-w-md bg-white shadow-2xl rounded-lg p-8 border border-gray-300">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Pendaftaran Siswa</h2>
+            <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
+            <input type="text" name="nama" id="nama" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 placeholder-gray-500 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Masukan Nama Siswa">
+
+            <label for="kelas" class="block text-sm font-medium text-gray-700 mt-4">Kelas</label>
+            <input type="text" name="kelas" id="kelas" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 placeholder-gray-500 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Masukan Kelas Siswa">
+
+            <button type="submit" class="mt-6 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition">Kirim</button>
+        </form>
+    </div>
+
+    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <table id="tablestudent" class="min-w-full bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-300">
+            <thead>
+                <tr class="bg-blue-600 text-white">
+                    <th class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">No</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Nama</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Kelas</th>
+                </tr>
+            </thead>
+            <tbody id="bodytablestudent" class="divide-y divide-gray-200"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let counter = 1;
+
+        document.getElementById('formstudent').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Ambil data dari form
+            const nama = document.getElementById('nama').value.trim();
+            const kelas = document.getElementById('kelas').value.trim();
+
+            // If-Else logic
+            if (!nama || !kelas) {
+                alert("Semua kolom harus diisi!");
+                return;
+            } else {
+                // Buat objek baru
+                const tablebody = document.getElementById('bodytablestudent');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-800">${counter}</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-800">${nama}</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-800">${kelas}</td>
+                `;
+
+                tablebody.appendChild(newRow);
+
+                // Increment counter for the next entry
+                counter++;
+
+                // Clear the input fields
+                document.getElementById('nama').value = '';
+                document.getElementById('kelas').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
